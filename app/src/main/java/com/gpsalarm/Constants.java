@@ -7,5 +7,6 @@ package com.gpsalarm;
 public class Constants {
     public static final int DEFAULTRESULTCODE = 0;
     public static final int HASRESULT = 1;
-    public static String SELECTIONBUILDER = "SelectionBuilder";
+    public static final String SELECTION = "Selection";
+    public static final String SELECTIONBUILDER = "SelectionBuilder";
 }

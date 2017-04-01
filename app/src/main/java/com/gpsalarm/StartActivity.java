@@ -11,7 +11,9 @@ import com.gpsalarm.selection.AlarmSelection;
 import com.gpsalarm.selection.CheckFrequencySelection;
 import com.gpsalarm.selection.CheckStartSelection;
 import com.gpsalarm.selection.LocationSelection;
+import com.gpsalarm.selection.Selection;
 import com.gpsalarm.selection.SelectionBuilder;
+import com.gpsalarm.tracking.Tracker;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +26,8 @@ public class StartActivity extends AppCompatActivity {
     private TextView selectedLocationText,
         selectedDelayText,
         selectedFrequencyText,
-        selectedAlarmText;
+        selectedAlarmText,
+        errorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class StartActivity extends AppCompatActivity {
         selectedDelayText = (TextView) findViewById(R.id.delaySelection);
         selectedFrequencyText = (TextView) findViewById(R.id.frequencySelection);
         selectedAlarmText = (TextView) findViewById(R.id.alarmSelection);
+        errorText = (TextView) findViewById(R.id.startErrorText);
     }
 
     @Override
@@ -43,7 +47,7 @@ public class StartActivity extends AppCompatActivity {
         selectedLocationText.setText("Lat: " + selectionBuilder.getLatitude() + " Lon: " + selectionBuilder.getLongitude());
         selectedDelayText.setText("" + selectionBuilder.getStartCheckTime());
         selectedFrequencyText.setText("" + selectionBuilder.getInterval());
-        selectedAlarmText.setText("" + selectionBuilder.getAlarmType());
+        selectedAlarmText.setText("Alarm: " + selectionBuilder.getAlarmType() + " snooze: " + selectionBuilder.getSnoozeInterval());
     }
 
     public void openLocationSelection(View view) {
@@ -78,6 +82,19 @@ public class StartActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if(resultCode == Constants.HASRESULT) {
             this.selectionBuilder = intent.getExtras().getParcelable(Constants.SELECTIONBUILDER);
+        }
+    }
+
+    public void submit(View view) {
+        Selection selection = selectionBuilder.generate();
+        if(selection != null) {
+            Intent intent = new Intent(this, Tracker.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constants.SELECTION, selectionBuilder.generate());
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else {
+            errorText.setText(R.string.badSelection);
         }
 
     }

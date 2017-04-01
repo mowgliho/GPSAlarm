@@ -14,4 +14,5 @@
     <string name="checkFrequencyHint">Time interval: seconds</string>
     <string name="locationError">don\'t leave blank!</string>
     <string name="alarmSelectionText">Use Default</string>
+    <string name="badSelection">Bad values for selection</string>
 </resources>
