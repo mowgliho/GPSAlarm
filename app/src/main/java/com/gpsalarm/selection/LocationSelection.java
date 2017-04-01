@@ -21,6 +21,7 @@ public class LocationSelection extends Selector {
         errorText = (TextView) findViewById(R.id.locationError);
     }
 
+    @Override
     public void submit(View view) {
         String lat = ((EditText) findViewById(R.id.LatitudeEditText)).getText().toString();
         String lon = ((EditText) findViewById(R.id.LongitudeEditText)).getText().toString();
@@ -29,7 +30,7 @@ public class LocationSelection extends Selector {
         } else {
             selectionBuilder.setLatitude(Double.parseDouble(lat));
             selectionBuilder.setLongitude(Double.parseDouble(lon));
-            super.submit(view);
+            super.submit();
         }
     }
 }

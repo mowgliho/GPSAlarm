@@ -22,7 +22,9 @@ public abstract class Selector extends AppCompatActivity {
         this.selectionBuilder = (SelectionBuilder) this.getIntent().getExtras().getParcelable(Constants.SELECTIONBUILDER);
     }
 
-    public void submit(View view) {
+    public abstract void submit(View view);
+
+    protected void submit() {
         Intent resultIntent = new Intent();
         resultIntent.putExtra(Constants.SELECTIONBUILDER, selectionBuilder);
         setResult(Constants.HASRESULT, resultIntent);

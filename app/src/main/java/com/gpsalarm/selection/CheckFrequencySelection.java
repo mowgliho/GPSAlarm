@@ -26,8 +26,9 @@ public class CheckFrequencySelection extends Selector {
         setContentView(R.layout.activity_check_frequency_selection);
     }
 
+    @Override
     public void submit(View view) {
         selectionBuilder.setInterval(Long.parseLong(((EditText) findViewById(R.id.checkFrequencyText)).getText().toString()));
-        super.submit(view);
+        super.submit();
     }
 }

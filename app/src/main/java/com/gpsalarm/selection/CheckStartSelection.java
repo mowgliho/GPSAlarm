@@ -31,6 +31,7 @@ public class CheckStartSelection extends Selector {
         ((DatePicker) findViewById(R.id.checkStartDatePicker)).setMinDate(System.currentTimeMillis()-1000);
     }
 
+    @Override
     public void submit(View view) {
         long time = getDateFromPickers(
                 (DatePicker) findViewById(R.id.checkStartDatePicker),
@@ -40,7 +41,7 @@ public class CheckStartSelection extends Selector {
             errorText.setText("Please select a time in the future, not one " + (System.currentTimeMillis() - time)/1000 + " seconds ago");
         } else {
             selectionBuilder.setStartCheckTime(time);
-            super.submit(view);
+            super.submit();
         }
     }
 
