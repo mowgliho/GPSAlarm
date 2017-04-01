@@ -28,9 +28,4 @@ public class LocationSelection extends AppCompatActivity {
         setResult(Constants.HASRESULT, resultIntent);
         finish();
     }
-
-    public void back(View view) {
-        setResult(Constants.DEFAULTRESULTCODE, new Intent());
-        finish();
-    }
 }

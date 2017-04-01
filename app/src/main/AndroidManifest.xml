@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.gpsalarm.selection.LocationSelection"></activity>
+        <activity android:name="com.gpsalarm.selection.LocationSelection" />
+        <activity android:name="com.gpsalarm.selection.checkStartSelection"></activity>
     </application>
 
 </manifest>
