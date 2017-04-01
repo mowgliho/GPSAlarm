@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gpsalarm.gpsalarm.R;
-import com.gpsalarm.selection.checkStartSelection;
+import com.gpsalarm.selection.CheckFrequencySelection;
+import com.gpsalarm.selection.CheckStartSelection;
 import com.gpsalarm.selection.LocationSelection;
 import com.gpsalarm.selection.SelectionBuilder;
 
@@ -15,12 +16,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class StartActivity extends AppCompatActivity {
-    private static final int LOCATIONSELECTION = 1,DELAYSELECTION = 2;
+    private static final int LOCATIONSELECTION = 1,DELAYSELECTION = 2, CHECKFREQUENCYSELECTION = 3;
     private static final DateFormat timeFormatter = new SimpleDateFormat("hh:mm:ss");
 
     private SelectionBuilder selectionBuilder = new SelectionBuilder();
     private TextView selectedLocationText,
-        selectedDelayText;
+        selectedDelayText,
+        selectedFrequencyText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class StartActivity extends AppCompatActivity {
         selectionBuilder.clear();
         selectedLocationText = (TextView) findViewById(R.id.locationSelection);
         selectedDelayText = (TextView) findViewById(R.id.delaySelection);
+        selectedFrequencyText = (TextView) findViewById(R.id.frequencySelection);
     }
 
     @Override
@@ -36,6 +39,7 @@ public class StartActivity extends AppCompatActivity {
         super.onResume();
         selectedLocationText.setText("Lat: " + selectionBuilder.getLatitude() + " Lon: " + selectionBuilder.getLongitude());
         selectedDelayText.setText("" + selectionBuilder.getStartCheckTime());
+        selectedFrequencyText.setText("" + selectionBuilder.getInterval());
     }
 
     public void openLocationSelection(View view) {
@@ -44,8 +48,13 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void openDelaySelection(View view) {
-        Intent intent = getIntent(checkStartSelection.class);
+        Intent intent = getIntent(CheckStartSelection.class);
         startActivityForResult(intent,DELAYSELECTION);
+    }
+
+    public void openCheckFrequencySelection(View view) {
+        Intent intent = getIntent(CheckFrequencySelection.class);
+        startActivityForResult(intent,CHECKFREQUENCYSELECTION);
     }
 
     private Intent getIntent(Class classObj) {

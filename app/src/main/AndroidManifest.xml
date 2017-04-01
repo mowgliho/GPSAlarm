@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.gpsalarm.selection.LocationSelection" />
-        <activity android:name="com.gpsalarm.selection.checkStartSelection"></activity>
+        <activity android:name="com.gpsalarm.selection.CheckStartSelection" />
+        <activity android:name="com.gpsalarm.selection.CheckFrequencySelection"></activity>
     </application>
 
 </manifest>

@@ -6,26 +6,30 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.gpsalarm.Constants;
 import com.gpsalarm.gpsalarm.R;
 
-public class LocationSelection extends AppCompatActivity {
-    private SelectionBuilder selectionBuilder;
+public class LocationSelection extends Selector {
+    private TextView errorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_selection);
-        this.selectionBuilder = (SelectionBuilder) this.getIntent().getExtras().getParcelable(Constants.SELECTIONBUILDER);
+        errorText = (TextView) findViewById(R.id.locationError);
     }
 
     public void submit(View view) {
-        selectionBuilder.setLatitude(Double.parseDouble(((EditText) findViewById(R.id.LatitudeEditText)).getText().toString()));
-        selectionBuilder.setLongitude(Double.parseDouble(((EditText) findViewById(R.id.LongitudeEditText)).getText().toString()));
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra(Constants.SELECTIONBUILDER, selectionBuilder);
-        setResult(Constants.HASRESULT, resultIntent);
-        finish();
+        String lat = ((EditText) findViewById(R.id.LatitudeEditText)).getText().toString();
+        String lon = ((EditText) findViewById(R.id.LongitudeEditText)).getText().toString();
+        if(lat.equals("") || lon.equals("")) {
+            errorText.setText(R.string.locationError);
+        } else {
+            selectionBuilder.setLatitude(Double.parseDouble(lat));
+            selectionBuilder.setLongitude(Double.parseDouble(lon));
+            super.submit(view);
+        }
     }
 }

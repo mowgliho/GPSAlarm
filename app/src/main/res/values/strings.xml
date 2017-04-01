@@ -11,4 +11,6 @@
     <string name="back">Back</string>
     <string name="submit">Submit</string>
     <string name="delayTimeHint">Insert a time</string>
+    <string name="checkFrequencyHint">Time interval: seconds</string>
+    <string name="locationError">don\'t leave blank!</string>
 </resources>

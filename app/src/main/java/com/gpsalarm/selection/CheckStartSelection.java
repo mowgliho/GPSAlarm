@@ -19,17 +19,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class checkStartSelection extends AppCompatActivity {
+public class CheckStartSelection extends Selector {
     private static final DateFormat formatter = new SimpleDateFormat("hh:mm:ss a");
     private TextView errorText;
-
-    private SelectionBuilder selectionBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_start_selection);
-        this.selectionBuilder = (SelectionBuilder) this.getIntent().getExtras().getParcelable(Constants.SELECTIONBUILDER);
         this.errorText = (TextView) findViewById(R.id.checkStartError);
         ((DatePicker) findViewById(R.id.checkStartDatePicker)).setMinDate(System.currentTimeMillis()-1000);
     }
@@ -43,10 +40,7 @@ public class checkStartSelection extends AppCompatActivity {
             errorText.setText("Please select a time in the future, not one " + (System.currentTimeMillis() - time)/1000 + " seconds ago");
         } else {
             selectionBuilder.setStartCheckTime(time);
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra(Constants.SELECTIONBUILDER, selectionBuilder);
-            setResult(Constants.HASRESULT, resultIntent);
-            finish();
+            super.submit(view);
         }
     }
 
