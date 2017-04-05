@@ -1,11 +1,9 @@
 package com.gpsalarm.selection;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
-import com.gpsalarm.AlarmType;
+import com.gpsalarm.util.AlarmType;
 import com.gpsalarm.gpsalarm.R;
 
 public class AlarmSelection extends Selector {

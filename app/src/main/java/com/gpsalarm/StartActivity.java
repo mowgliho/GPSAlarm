@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.gpsalarm.gpsalarm.R;
@@ -14,6 +16,7 @@ import com.gpsalarm.selection.LocationSelection;
 import com.gpsalarm.selection.Selection;
 import com.gpsalarm.selection.SelectionBuilder;
 import com.gpsalarm.tracking.Tracker;
+import com.gpsalarm.util.LocationFinderType;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,6 +31,8 @@ public class StartActivity extends AppCompatActivity {
         selectedFrequencyText,
         selectedAlarmText,
         errorText;
+    private Spinner locationFinder;
+    private ArrayAdapter<LocationFinderType> locationFinderAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,10 @@ public class StartActivity extends AppCompatActivity {
         selectedFrequencyText = (TextView) findViewById(R.id.frequencySelection);
         selectedAlarmText = (TextView) findViewById(R.id.alarmSelection);
         errorText = (TextView) findViewById(R.id.startErrorText);
+        locationFinder = (Spinner) findViewById(R.id.locationFinder);
+        locationFinderAdapter = new ArrayAdapter<LocationFinderType>(
+                this,R.layout.support_simple_spinner_dropdown_item,LocationFinderType.values());
+        locationFinder.setAdapter(locationFinderAdapter);
     }
 
     @Override
@@ -48,6 +57,7 @@ public class StartActivity extends AppCompatActivity {
         selectedDelayText.setText("" + selectionBuilder.getStartCheckTime());
         selectedFrequencyText.setText("" + selectionBuilder.getInterval());
         selectedAlarmText.setText("Alarm: " + selectionBuilder.getAlarmType() + " snooze: " + selectionBuilder.getSnoozeInterval());
+        locationFinder.setSelection(locationFinderAdapter.getPosition(selectionBuilder.getFinderType()));
     }
 
     public void openLocationSelection(View view) {

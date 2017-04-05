@@ -24,7 +24,8 @@
         android:text="TextView"
         app:layout_constraintBaseline_toBaselineOf="@+id/locationButton"
         app:layout_constraintRight_toLeftOf="@+id/locationButton"
-        android:layout_marginRight="12dp" />
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp" />
 
     <Button
         android:id="@+id/locationButton"
@@ -35,7 +36,8 @@
         android:text="@string/select"
         app:layout_constraintTop_toBottomOf="@+id/locationText"
         app:layout_constraintLeft_toRightOf="@+id/locationText"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp" />
 
     <TextView
         android:id="@+id/delaySelection"
@@ -44,7 +46,8 @@
         android:text="TextView"
         app:layout_constraintBaseline_toBaselineOf="@+id/delayButton"
         app:layout_constraintRight_toLeftOf="@+id/delayButton"
-        android:layout_marginRight="12dp" />
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp" />
 
     <Button
         android:id="@+id/delayButton"
@@ -55,7 +58,8 @@
         android:onClick="openDelaySelection"
         android:text="@string/select"
         app:layout_constraintLeft_toRightOf="@+id/delayText"
-        app:layout_constraintTop_toBottomOf="@+id/delayText" />
+        app:layout_constraintTop_toBottomOf="@+id/delayText"
+        android:layout_marginStart="16dp" />
 
     <TextView
         android:id="@+id/frequencySelection"
@@ -64,7 +68,8 @@
         android:text="TextView"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkFrequencyButton"
         app:layout_constraintRight_toLeftOf="@+id/checkFrequencyButton"
-        android:layout_marginRight="12dp" />
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp" />
 
     <Button
         android:id="@+id/checkFrequencyButton"
@@ -75,7 +80,8 @@
         android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@+id/checkFrequencyText"
         app:layout_constraintLeft_toRightOf="@+id/checkFrequencyText"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp" />
 
     <TextView
         android:id="@+id/alarmSelection"
@@ -94,7 +100,8 @@
         android:onClick="openAlarmSelection"
         android:text="@string/select"
         app:layout_constraintLeft_toRightOf="@+id/alarmText"
-        app:layout_constraintTop_toBottomOf="@+id/alarmText" />
+        app:layout_constraintTop_toBottomOf="@+id/alarmText"
+        android:layout_marginStart="16dp" />
 
     <TextView
         android:id="@+id/locationText"
@@ -154,5 +161,15 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/button"
-        app:layout_constraintRight_toLeftOf="@+id/button" />
+        app:layout_constraintRight_toLeftOf="@+id/button"
+        android:layout_marginEnd="16dp" />
+
+    <Spinner
+        android:id="@+id/locationFinder"
+        android:layout_width="112dp"
+        android:layout_height="21dp"
+        android:layout_marginRight="64dp"
+        app:layout_constraintRight_toLeftOf="@+id/frequencySelection"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp" />
 </android.support.constraint.ConstraintLayout>

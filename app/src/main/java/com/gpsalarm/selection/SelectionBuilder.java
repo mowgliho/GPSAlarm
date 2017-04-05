@@ -3,7 +3,8 @@ package com.gpsalarm.selection;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.gpsalarm.AlarmType;
+import com.gpsalarm.util.AlarmType;
+import com.gpsalarm.util.LocationFinderType;
 
 /**
  * Created by Brent on 3/31/2017.
@@ -16,6 +17,7 @@ public class SelectionBuilder implements Parcelable {
     private long interval;
     private AlarmType alarmType;
     private long snoozeInterval;
+    private LocationFinderType finderType;
 
     public SelectionBuilder() {
         this.latitude = -1;
@@ -24,6 +26,7 @@ public class SelectionBuilder implements Parcelable {
         this.interval = -1;
         this.alarmType = null;
         this.snoozeInterval = -1;
+        this.finderType = LocationFinderType.BOTH;
     }
 
     public void clear() {
@@ -33,6 +36,7 @@ public class SelectionBuilder implements Parcelable {
         interval = -1;
         alarmType = null;
         snoozeInterval = -1;
+        this.finderType = LocationFinderType.BOTH;
     }
 
     public void setLatitude(double latitude) {
@@ -59,6 +63,10 @@ public class SelectionBuilder implements Parcelable {
         this.snoozeInterval = snoozeInterval;
     }
 
+    public void setFinderType(LocationFinderType finderType) {
+        this.finderType = finderType;
+    }
+
     public boolean validate() {
         return(
             latitude >= 0
@@ -72,7 +80,7 @@ public class SelectionBuilder implements Parcelable {
 
     public Selection generate() {
         if(!validate()) return null;
-        else return new Selection(latitude,longitude, startCheckTime,interval,alarmType,snoozeInterval);
+        else return new Selection(latitude,longitude, startCheckTime,interval,alarmType,snoozeInterval, finderType);
     }
 
     public double getLatitude() {
@@ -99,6 +107,10 @@ public class SelectionBuilder implements Parcelable {
         return snoozeInterval;
     }
 
+    public LocationFinderType getFinderType() {
+        return finderType;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -112,6 +124,7 @@ public class SelectionBuilder implements Parcelable {
         dest.writeLong(interval);
         dest.writeSerializable(alarmType);
         dest.writeLong(snoozeInterval);
+        dest.writeSerializable(finderType);
     }
 
     private SelectionBuilder(Parcel in) {
@@ -121,6 +134,7 @@ public class SelectionBuilder implements Parcelable {
         this.interval = in.readLong();
         this.alarmType = (AlarmType) in.readSerializable();
         this.snoozeInterval = in.readLong();
+        this.finderType = (LocationFinderType) in.readSerializable();
     }
 
     public static final Parcelable.Creator<SelectionBuilder> CREATOR
@@ -148,6 +162,7 @@ public class SelectionBuilder implements Parcelable {
         builder.append("Int: ").append(interval);
         builder.append("Ala: ").append(alarmType);
         builder.append("Sno: ").append(snoozeInterval);
+        builder.append("Fin: ").append(finderType);
         return(builder.toString());
     }
 }

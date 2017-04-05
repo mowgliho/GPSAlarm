@@ -1,4 +1,4 @@
-package com.gpsalarm;
+package com.gpsalarm.util;
 
 /**
  * Created by Brent on 3/31/2017.
