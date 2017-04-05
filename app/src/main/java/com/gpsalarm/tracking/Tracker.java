@@ -1,5 +1,6 @@
 package com.gpsalarm.tracking;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -18,6 +19,12 @@ public class Tracker extends AppCompatActivity {
         setContentView(R.layout.activity_tracker);
         this.selection = (Selection) this.getIntent().getExtras().getParcelable(Constants.SELECTION);
         this.selectionText = (TextView) findViewById(R.id.trackerSelection);
+
+        Intent intent = new Intent(this, LocationService.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.SELECTION,this.selection);
+        intent.putExtras(bundle);
+        startService(intent);
     }
 
     @Override

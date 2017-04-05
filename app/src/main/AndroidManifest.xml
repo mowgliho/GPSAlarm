@@ -26,6 +26,8 @@
         <activity android:name="com.gpsalarm.selection.CheckFrequencySelection" />
         <activity android:name="com.gpsalarm.selection.AlarmSelection" />
         <activity android:name="com.gpsalarm.tracking.Tracker"></activity>
+        <service android:name="com.gpsalarm.tracking.LocationService" />
     </application>
+
 
 </manifest>
