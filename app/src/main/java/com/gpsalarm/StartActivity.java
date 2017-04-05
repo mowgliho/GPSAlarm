@@ -96,6 +96,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void submit(View view) {
+        selectionBuilder.setFinderType((LocationFinderType) locationFinder.getSelectedItem());
         Selection selection = selectionBuilder.generate();
         if(selection != null) {
             Intent intent = new Intent(this, Tracker.class);

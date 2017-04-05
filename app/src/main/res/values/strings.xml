@@ -15,4 +15,6 @@
     <string name="locationError">don\'t leave blank!</string>
     <string name="alarmSelectionText">Use Default</string>
     <string name="badSelection">Bad values for selection</string>
+    <string name="notification_title">GPS Alarm</string>
+    <string name="notification_message">Searching</string>
 </resources>

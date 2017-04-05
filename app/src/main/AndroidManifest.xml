@@ -25,8 +25,8 @@
         <activity android:name="com.gpsalarm.selection.CheckStartSelection" />
         <activity android:name="com.gpsalarm.selection.CheckFrequencySelection" />
         <activity android:name="com.gpsalarm.selection.AlarmSelection" />
-        <activity android:name="com.gpsalarm.tracking.Tracker"></activity>
-        <service android:name="com.gpsalarm.tracking.LocationService" />
+        <activity android:name="com.gpsalarm.tracking.Tracker" />
+        <service android:name="com.gpsalarm.tracking.LocationService" android:exported="false"/>
     </application>
 
 

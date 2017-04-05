@@ -9,4 +9,5 @@ public class Constants {
     public static final int HASRESULT = 1;
     public static final String SELECTION = "Selection";
     public static final String SELECTIONBUILDER = "SelectionBuilder";
+    public static final int ONGOING_NOTIFICATION_ID = 1;
 }
