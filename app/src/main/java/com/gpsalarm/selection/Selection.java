@@ -18,8 +18,11 @@ public class Selection implements Parcelable {
     private final AlarmType alarmType;
     private final long snoozeInterval;
     private final LocationFinderType finderType;
+    private final double distanceAway;
 
-    public Selection(double latitude, double longitude, long startCheckTime, long interval, AlarmType alarmType, long snoozeInterval, LocationFinderType finderType) {
+    public Selection(double latitude, double longitude, long startCheckTime, long interval,
+                     AlarmType alarmType, long snoozeInterval, LocationFinderType finderType,
+                     double distanceAway) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.startCheckTime = startCheckTime;
@@ -27,6 +30,7 @@ public class Selection implements Parcelable {
         this.alarmType = alarmType;
         this.snoozeInterval = snoozeInterval;
         this.finderType = finderType;
+        this.distanceAway = distanceAway;
     }
 
     public double getLatitude() {
@@ -57,6 +61,10 @@ public class Selection implements Parcelable {
         return finderType;
     }
 
+    public double getDistanceAway() {
+        return distanceAway;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -71,10 +79,19 @@ public class Selection implements Parcelable {
         dest.writeSerializable(alarmType);
         dest.writeLong(snoozeInterval);
         dest.writeSerializable(finderType);
+        dest.writeDouble(distanceAway);
     }
 
     private Selection(Parcel in) {
-        this(in.readDouble(), in.readDouble(), in.readLong(), in.readLong(), (AlarmType) in.readSerializable(), in.readLong(), (LocationFinderType) in.readSerializable());
+        this(
+                in.readDouble(),
+                in.readDouble(),
+                in.readLong(),
+                in.readLong(),
+                (AlarmType) in.readSerializable(),
+                in.readLong(),
+                (LocationFinderType) in.readSerializable(),
+                in.readDouble());
     }
 
     public static final Parcelable.Creator<Selection> CREATOR
@@ -101,6 +118,7 @@ public class Selection implements Parcelable {
         builder.append("Ala: ").append(alarmType);
         builder.append("Sno: ").append(snoozeInterval);
         builder.append("Fin: ").append(finderType);
+        builder.append("Dst: ").append(distanceAway);
         return (builder.toString());
     }
 }

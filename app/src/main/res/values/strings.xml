@@ -17,4 +17,5 @@
     <string name="badSelection">Bad values for selection</string>
     <string name="notification_title">GPS Alarm</string>
     <string name="notification_message">Searching</string>
+    <string name="distanceTrigger">Distance Away (meters)</string>
 </resources>

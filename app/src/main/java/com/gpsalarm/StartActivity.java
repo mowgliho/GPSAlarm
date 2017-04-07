@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,10 +21,11 @@ import com.gpsalarm.util.LocationFinderType;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class StartActivity extends AppCompatActivity {
     private static final int LOCATIONSELECTION = 1,DELAYSELECTION = 2, CHECKFREQUENCYSELECTION = 3, ALARMSELECTION = 4;
-    private static final DateFormat timeFormatter = new SimpleDateFormat("hh:mm:ss");
+    private static final DateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd: HH:mm:ss");
 
     private SelectionBuilder selectionBuilder = new SelectionBuilder();
     private TextView selectedLocationText,
@@ -33,6 +35,7 @@ public class StartActivity extends AppCompatActivity {
         errorText;
     private Spinner locationFinder;
     private ArrayAdapter<LocationFinderType> locationFinderAdapter;
+    private EditText distanceAway;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +51,18 @@ public class StartActivity extends AppCompatActivity {
         locationFinderAdapter = new ArrayAdapter<LocationFinderType>(
                 this,R.layout.support_simple_spinner_dropdown_item,LocationFinderType.values());
         locationFinder.setAdapter(locationFinderAdapter);
+        distanceAway = (EditText) findViewById(R.id.distanceEditText);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         selectedLocationText.setText("Lat: " + selectionBuilder.getLatitude() + " Lon: " + selectionBuilder.getLongitude());
-        selectedDelayText.setText("" + selectionBuilder.getStartCheckTime());
+        selectedDelayText.setText(dateTimeFormatter.format(new Date(selectionBuilder.getStartCheckTime())));
         selectedFrequencyText.setText("" + selectionBuilder.getInterval());
         selectedAlarmText.setText("Alarm: " + selectionBuilder.getAlarmType() + " snooze: " + selectionBuilder.getSnoozeInterval());
         locationFinder.setSelection(locationFinderAdapter.getPosition(selectionBuilder.getFinderType()));
+        distanceAway.setText(selectionBuilder.getDistanceAway() + "");
     }
 
     public void openLocationSelection(View view) {
@@ -99,10 +104,7 @@ public class StartActivity extends AppCompatActivity {
         selectionBuilder.setFinderType((LocationFinderType) locationFinder.getSelectedItem());
         Selection selection = selectionBuilder.generate();
         if(selection != null) {
-            Intent intent = new Intent(this, Tracker.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelable(Constants.SELECTION, selectionBuilder.generate());
-            intent.putExtras(bundle);
+            Intent intent = Tracker.getIntent(this,selection,false);
             startActivity(intent);
         } else {
             errorText.setText(R.string.badSelection);

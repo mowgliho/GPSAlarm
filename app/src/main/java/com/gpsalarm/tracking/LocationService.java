@@ -48,6 +48,7 @@ public class LocationService extends Service {
     @Override
     public boolean onUnbind(Intent intent) {
         this.selection = null;
+        stopSelf();
         return false;
     }
 
@@ -88,14 +89,19 @@ public class LocationService extends Service {
     }
 
     public class Binder extends android.os.Binder {
-        void addLocationServiceListener(LocationListener listener) {
+        void addLocationServiceListener(Tracker listener) {
             LocationFinderType finderType = selection.getFinderType();
             long locationInterval = selection.getInterval();
             for(String provider : finderType.getProviders()) {
                 try {
-                    locationManager.requestLocationUpdates(
-                            provider, locationInterval, LOCATION_DISTANCE,
-                            listener);
+                    Location location = locationManager.getLastKnownLocation(provider);
+                    if(location != null && listener.changeLocation(location)) {
+                        //alread triggered
+                    } else {
+                        locationManager.requestLocationUpdates(
+                                provider, locationInterval, LOCATION_DISTANCE,
+                                listener);
+                    }
                 } catch (java.lang.SecurityException ex) {
                     Log.i(TAG, "fail to request location update, ignore", ex);
                 } catch (IllegalArgumentException ex) {
@@ -115,6 +121,10 @@ public class LocationService extends Service {
                 startForeground(ONGOING_NOTIFICATION_ID, notification);
             }
             locationListeners.add(listener);
+        }
+
+        public void removeLocationServiceListener(LocationListener listener) {
+            locationManager.removeUpdates(listener);
         }
     }
 }
